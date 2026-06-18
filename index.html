@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GROSSEAU Eli</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- 
+<div id="loader">
+    <div></div>
+</div>
+-->
+
+
+<!-- ===============effet visuel du background========================= -->
+<!-- <canvas id="snow-canvas" aria-hidden="true"></canvas> -->
+<div id="overlay-left"  aria-hidden="true"></div>
+<div id="overlay-bottom" aria-hidden="true"></div>
+<div id="scanlines"     aria-hidden="true"></div>
+
+
+
+
+<img id="background" src="montagne2.png" alt="img de fond">
+
+
+
+
+<!-- ===============nav========================= -->
+
+<nav id="menu" aria-label="Menu principal">
+    <ul>
+        <li class="menu-item" data-section="contact">
+            <span>commencer</span>
+        </li>
+        <li class="menu-item">
+            <span>compétences</span>
+        </li>
+        <li class="menu-item">
+            <span>sac-à-dos</span>
+        </li>
+        <li class="menu-item">
+            <span>trophées</span>
+        </li>
+        <li class="menu-item">
+            <span>options</span>
+        </li>
+        
+    </ul>
+</nav>
+
+
+<!-- ===============aside========================= -->
+<aside id="side-panel">
+    
+    <div class="panel-card">
+        <h3>// PROFIL</h3>
+        <dl class="profil-list">
+            <dt>Nom</dt>
+            <dd>GROSSEAU Eli</dd>
+
+            <dt>Âge</dt>
+            <dd>20 ans</dd>
+
+            <dt>Formation</dt>
+            <dd>L3 Info</dd>
+
+            <dt>Statuts</dt>
+            <dd style="color:#00a740">● En ligne</dd>
+
+        </dl>
+    </div>
+
+    <div class="panel-card">
+        <h3>// quêtes</h3>
+
+        <p class="prog-label"><span data-i18n="quete.master">Licence informatique</span><span>75%</span></p>
+        <div class="prog-track"><div class="prog-fill" style="width:75%"></div></div>
+
+        <p class="prog-label"><span data-i18n="quete.master">Portfolio</span><span>60%</span></p>
+        <div class="prog-track"><div class="prog-fill" style="width:60%"></div></div>
+
+        <div class="locked">
+        <p class="prog-label"><span data-i18n="quete.portfolio">Master</span><span>🔒</span></p>
+        <div class="prog-track"><div class="prog-fill" style="width:0%"></div></div>
+        </div>
+    </div>
+    
+</aside>
+
+
+<!-- contenu principal -->
+
+<section class="section-panel" id="section-contact" aria-label="Contact"> 
+    <div class="section-inner">
+        <h1>Commencer</h1>
+        <form id="contact-form" action="https://formspree.io/f/xykaarzw" method="POST">
+                <div class="contact-field">
+                    <label>NOM DU JOUEUR</label>
+                    <input type="text" name="name" placeholder="Ton nom" required>
+                </div>
+                <div class="contact-field">
+                    <label>CANAL DE COMMUNICATION</label>
+                    <input type="email" name="email" placeholder="ton@email.com" required>
+                </div>
+                <div class="contact-field">
+                    <label>MESSAGE</label>
+                    <textarea name="message" placeholder="Décris ta demande..." required></textarea>
+                </div>
+                <button type="submit" class="btn-launch">Envoyer</button>
+                <p id="form-status" style="margin-top:12px; font-family:var(--font-mono);
+                font-size:0.75rem; color:var(--accent); display:none;"></p>
+        </form>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+<!-- ===============footer========================= -->
+<footer id="footer">
+
+    <div class="controls">
+        <span class="box">←↑↓→</span>
+        <span class="control-label">Naviguer</span>
+    </div>
+
+    <div class="separation"></div>
+
+    <div class="controls">
+        <span class="box">↵ entrée</span>
+        <span class="control-label">Sélectionner</span>
+    </div>
+
+    <div class="separation"></div>
+
+    <div class="controls">
+        <span class="box">Esc</span>
+        <span class="control-label">Retour</span>
+    </div>
+
+    <span class="footer-right control-label">_ - selectionné</span>
+    <span class="box">🇫🇷</span>
+</footer>
+
+
+<script src="main.js"></script>
+</body>
+</html>
+
+
