@@ -1,5 +1,5 @@
 
-
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
     --accent:    #d4d4d4;
@@ -115,7 +115,6 @@ html, body {
 .menu-item{
     display: flex; align-items: center; gap: 12px;
     padding: 10px 20px 10px 14px;
-    cursor: pointer; 
     border-radius: 0;
     position: relative;
     list-style: none;
@@ -125,13 +124,11 @@ html, body {
     
 }
 
-.menu-item:hover {
-
-    background: rgba(0, 0, 0, 0.39);
-    /*backdrop-filter: blur(4px);*/
+.menu-item.active {
+  background: rgba(0, 0, 0, 0.39);
+  color: var(--accent);
+  padding-left: 12px;
 }
-
-
 
 
 
@@ -237,6 +234,74 @@ html, body {
     font-size: 0.6rem; 
     color: var(--text-dim); 
     letter-spacing: 0.1em;
+}
+
+
+
+
+
+
+
+.section-panel {
+      position: fixed; inset: 0; z-index: 20;
+      display: none; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.72); backdrop-filter: blur(5px);
+    }
+.section-panel.open { display: flex; }
+.section-inner {
+    background: var(--panel-bg); border: 1px solid var(--border);
+    border-radius: 6px; padding: 30px 36px;
+    max-width: 680px; width: 90vw; max-height: 82vh; overflow-y: auto;
+}
+
+.section-panel h1{
+    color: white;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.skill-level{
+    margin-bottom: 25px;
+}
+
+
+.skill-grid {
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(155px,1fr));
+    gap: 14px; 
+    margin-top: -5px;
+}
+
+.skill-card {
+    background: rgba(125,249,255,0.05);
+    border-radius: 5px; 
+    padding: 10px; text-align: center;
+}
+
+.skill-card h3{
+    color: white;
+    margin: 10px;
+}
+
+
+
+.skill-card img {
+    width: min(65px, 30vw);
+    /*height: 60px;*/
+    object-fit: contain;
+    margin: 8px;
+}
+
+.skill-level h2 {
+    border-bottom:1.5px solid rgba(160, 160, 160, 0.212) ;
+    color: white;
+    padding-bottom: 13px;
+    margin-bottom: 20px;
+}
+
+.skill-level svg {
+    vertical-align: middle;
+    
 }
 
 
