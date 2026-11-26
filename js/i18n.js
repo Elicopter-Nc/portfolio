@@ -88,15 +88,13 @@ const EN = {
   "Conteneurs, déploiement, kubectl": "Containers, deployment, kubectl",
   "Les tests": "Testing",
   "Jest et tests de bout en bout dans la CI GitLab": "Jest and end-to-end tests in GitLab CI",
-  "tout ça grâce au stage !": "all thanks to my internship!",
   "Prochaines étapes": "Next steps",
   "Page 5 · Objectifs": "Page 5 · Goals",
   "Créer mon portfolio": "Build my portfolio",
   "Finir mon stage chez ISI": "Finish my internship at ISI",
   "Valider ma licence": "Complete my degree",
   "Entrer en master": "Start a master's degree",
-  "Mettre Box Box en public et l'améliorer": "Make Box Box public and keep improving it",
-  "Contribuer à un projet open source": "Contribute to an open-source project",
+  "Devenir Challenger sur LoL": "Reach Challenger in LoL",
   "la suite au prochain commit…": "to be continued in the next commit…",
   "Page 6 · Contact": "Page 6 · Contact",
   "Je termine ma licence et je pense poursuivre en master. En attendant, mon code est sur GitHub : n'hésite pas à y jeter un œil ou à me contacter.":
@@ -158,7 +156,7 @@ const EN = {
   "Stage": "Internship",
   "Parcours & compétences": "Background & skills",
   "↓ fais défiler, les cartes s'empilent": "↓ scroll, the cards stack up",
-  "conçoit des applis qui ont du caractère.": "builds apps with character.",
+  "étudiant en info, code ses projets perso.": "CS student who builds side projects.",
 
   // météo
   "Ensoleillé": "Sunny", "Éclaircies": "Partly sunny", "Couvert": "Overcast", "Brouillard": "Fog",

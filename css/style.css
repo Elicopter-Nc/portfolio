@@ -112,6 +112,8 @@ button{font:inherit;color:inherit}
 .card{background:#fdfcf9;color:#1b1d20;border-radius:6px;padding:22px 24px;display:flex;flex-direction:column;justify-content:space-between}
 .card h1{font:800 38px/1 var(--font-display);margin:0;letter-spacing:-.03em}
 .card p{margin:4px 0 0;font-size:16px;color:#55595f}
+.card-id{display:flex;align-items:center;gap:12px}
+.card .avatar{width:40px;height:40px;border-radius:50%;flex:none;object-fit:cover;box-shadow:0 0 0 2px #fdfcf9,0 0 0 3px #d9d4ca;pointer-events:none}
 .card small{font:500 13px var(--font-mono);color:#55595f}
 /* dossier fermé sur le bureau */
 .folder-desk .fb{position:absolute;inset:0;top:12%;background:var(--kraft-back);border-radius:6px 14px 10px 10px}

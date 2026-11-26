@@ -76,7 +76,7 @@ document.getElementById("app").innerHTML = `
     </nav>
   </div>
   <header class="hero">
-    <h1>Eli <span>${t("conçoit des applis qui ont du caractère.")}</span></h1>
+    <h1>Eli, <span>${t("étudiant en info, code ses projets perso.")}</span></h1>
     <p>${esc(tr(CV, "profile"))}</p>
     <p class="meta"><span>${esc(tr(CV, "place"))}</span><a href="${GITHUB_URL}" target="_blank" rel="noopener">${esc(GITHUB_URL.replace("https://", ""))}</a></p>
     <div class="hint">${t("↓ fais défiler, les cartes s'empilent")}</div>
