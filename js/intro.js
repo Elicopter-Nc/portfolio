@@ -13,6 +13,17 @@ function markSeen() {
   try { localStorage.setItem(KEY, "1"); } catch (e) { /* stockage bloqué : l'accueil reviendra, ce n'est pas grave */ }
 }
 
+// Pendant que la porte pivote, on cache ce qui est fixé dessus dès qu'on voit son dos (au-delà de 90°)
+function watchBack(door) {
+  const t0 = performance.now();
+  const tick = () => {
+    const m = new DOMMatrix(getComputedStyle(door).transform);
+    if (m.m11 < 0) { door.classList.add("back"); return; }   // cos(angle) < 0 : la porte montre son dos
+    if (performance.now() - t0 < 2000) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
+
 // Poignée qui s'abaisse, porte qui s'ouvre, puis on « avance » dans l'embrasure
 async function enter(intro) {
   if (reduceMotion) return;
@@ -22,6 +33,7 @@ async function enter(intro) {
   intro.classList.add("turn");
   await wait(260);
   intro.classList.add("open");
+  watchBack(document.getElementById("intro-go"));
   await wait(750);
   // On avance un peu vers la porte pendant que la lumière de la pièce envahit l'écran depuis l'embrasure.
   // (pas de zoom géant : Firefox laisse des traces à l'écran avec une couche aussi grande)

@@ -8,6 +8,7 @@
 const EN = {
   // bureau
   "Développeur fullstack": "Full-stack developer",
+  "Étudiant en info": "CS student",
   "Développeur fullstack en devenir": "Aspiring full-stack developer",
   "Formation": "Education",
   "Expérience": "Experience",
