@@ -5,7 +5,7 @@ import {GITHUB_URL} from "./data.js";
 import {isEn, locale} from "./i18n.js";
 
 const USER = GITHUB_URL.split("/").pop();
-const CACHE = "eli-portfolio-contribs";
+const CACHE = "eli-portfolio-contribs-v2";   // changer le nom si le format des données change
 let data = null;          // {byDate: {"2026-11-26": {count, level}}, total}
 let page = null;          // mois affiché en gros plan : {y, m} (m de 0 à 11)
 
@@ -27,7 +27,7 @@ function monthCells(y, m) {
   return Array.from({length: total}, (_, i) => {
     const d = new Date(y, m, i - first + 1);
     const key = iso(d.getFullYear(), d.getMonth(), d.getDate());
-    return {day: d.getDate(), key, out: d.getMonth() !== m, we: (i % 7) >= 5, c: data?.byDate[key]};
+    return {day: d.getDate(), key, out: d.getMonth() !== m, we: (i % 7) >= 5, c: data?.byDate?.[key]};
   });
 }
 
@@ -42,7 +42,7 @@ function renderDesk() {
     `<i class="${c.out ? "out" : ""}${c.key === t ? " today" : ""}" data-l="${c.c?.level || 0}">${c.day}</i>`).join("");
   document.getElementById("cal-grid").innerHTML = head + cells;
   document.getElementById("cal-foot").textContent = data
-    ? (isEn() ? `${data.total} GitHub contributions this year` : `${data.total} contributions GitHub sur un an`)
+    ? (isEn() ? `${data.total} contributions this year` : `${data.total} contributions sur un an`)
     : "GitHub";
 }
 
@@ -95,7 +95,8 @@ export function openCalendar(src, openOverlay) {
 async function load() {
   try {
     const c = JSON.parse(sessionStorage.getItem(CACHE) || "null");
-    if (c && Date.now() - c.at < 60 * 60 * 1000) return c.data;
+    // on ne réutilise le cache que s'il a le bon format
+    if (c && Date.now() - c.at < 60 * 60 * 1000 && c.data?.byDate) return c.data;
   } catch (e) {}
   const r = await (await fetch(`https://github-contributions-api.jogruber.de/v4/${USER}?y=last`)).json();
   const byDate = {};

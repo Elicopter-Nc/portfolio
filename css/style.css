@@ -431,7 +431,7 @@ button{font:inherit;color:inherit}
 .cal-big .cm-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
 .cal-big .cm-day{position:relative;min-height:clamp(46px,8vw,74px);border-top:2px solid #e3e1da;padding:6px;display:flex;flex-direction:column;justify-content:space-between;background:#fff;border-radius:2px}
 .cal-big .cm-day.out{background:none;border-top-color:transparent}
-.cal-big .cm-day.out b{color:#c9ccd1}
+.cal-big .cm-day.out b,.cal-big .cm-day.out.we b{color:#c9ccd1}
 .cal-big .cm-day b{font:700 clamp(14px,2.2vw,20px)/1 var(--font-display);color:#1b1d20}
 .cal-big .cm-day.we b{color:#b3261e}
 .cal-big .cm-day small{font:500 10.5px var(--font-mono);color:#1f5f33;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -439,6 +439,7 @@ button{font:inherit;color:inherit}
 .cal-big .cm-day[data-l]:not([data-l="0"]){border-top-color:#30a14e}
 /* aujourd'hui : entouré au feutre rouge */
 .cal-big .cm-day.today::after{content:"";position:absolute;left:2px;top:2px;width:34px;height:30px;border:2.5px solid #e4572e;border-radius:50% 45% 55% 48%;transform:rotate(-8deg)}
+.cal-big footer{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;font:500 14px var(--font-body);color:#55595f}
 .cal-big footer .cm-sum b{color:#1b1d20}
 @media (max-width:560px){.cal-big .cm-day small{display:none}.cal-big .cm-week{font-size:10px;letter-spacing:0;padding:0 2px}.cal-big .cm-day{padding:4px}.cal-big .cm-day.today::after{width:26px;height:24px}}
 .cal-big footer a{color:#fff;background:#1b1d20;text-decoration:none;font:600 14px var(--font-body);padding:9px 16px;border-radius:999px}
