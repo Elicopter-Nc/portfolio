@@ -224,7 +224,8 @@ button{font:inherit;color:inherit}
 .cal-grid .wd{color:#b3261e;font-size:7.5px;align-self:center}
 .cal-grid i{font-style:normal;display:grid;place-items:center;border-radius:50%;color:#3c4046}
 .cal-grid i.out{visibility:hidden}
-.cal-grid i[data-l="1"]{background:#c6efcd}.cal-grid i[data-l="2"]{background:#7fd890}.cal-grid i[data-l="3"]{background:#40c463;color:#fff}.cal-grid i[data-l="4"]{background:#216e39;color:#fff}
+/* contributions : surligneur jaune-orangé, comme les touches E L I du clavier */
+.cal-grid i[data-l="1"]{background:#fcebc0}.cal-grid i[data-l="2"]{background:#f8d77e}.cal-grid i[data-l="3"]{background:#f2b53a}.cal-grid i[data-l="4"]{background:#e0900f;color:#fff}
 .cal-grid i.today{box-shadow:0 0 0 1.5px #e4572e;color:#b3261e}
 .cal-foot{font:500 10px var(--font-mono);color:#55595f;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 /* --- lueur de l'écran en mode nuit --- */
@@ -434,9 +435,9 @@ button{font:inherit;color:inherit}
 .cal-big .cm-day.out b,.cal-big .cm-day.out.we b{color:#c9ccd1}
 .cal-big .cm-day b{font:700 clamp(14px,2.2vw,20px)/1 var(--font-display);color:#1b1d20}
 .cal-big .cm-day.we b{color:#b3261e}
-.cal-big .cm-day small{font:500 10.5px var(--font-mono);color:#1f5f33;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.cal-big .cm-day[data-l="1"]{background:#e3f6e6}.cal-big .cm-day[data-l="2"]{background:#c6efcd}.cal-big .cm-day[data-l="3"]{background:#9be9a8}.cal-big .cm-day[data-l="4"]{background:#6fd283}
-.cal-big .cm-day[data-l]:not([data-l="0"]){border-top-color:#30a14e}
+.cal-big .cm-day small{font:500 10.5px var(--font-mono);color:#7a4a06;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cal-big .cm-day[data-l="1"]{background:#fdf1d2}.cal-big .cm-day[data-l="2"]{background:#fbe3a4}.cal-big .cm-day[data-l="3"]{background:#f7cc6a}.cal-big .cm-day[data-l="4"]{background:#f2b53a}
+.cal-big .cm-day[data-l]:not([data-l="0"]){border-top-color:#e0900f}
 /* aujourd'hui : entouré au feutre rouge */
 .cal-big .cm-day.today::after{content:"";position:absolute;left:2px;top:2px;width:34px;height:30px;border:2.5px solid #e4572e;border-radius:50% 45% 55% 48%;transform:rotate(-8deg)}
 .cal-big footer{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;font:500 14px var(--font-body);color:#55595f}
