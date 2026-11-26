@@ -29,6 +29,8 @@ const EN = {
   "Clique sur les objets du bureau, ou déplace-les": "Click the objects on the desk, or move them around",
   "Ranger le bureau": "Tidy up the desk",
   "Entrez sans frapper !": "Come in, no need to knock!",
+  "Diplôme du baccalauréat général, spécialités Mathématiques et NSI, 2023": "French high school diploma (baccalauréat), Maths and Computer Science, 2023",
+  "Cadre vide réservé à la licence informatique, bientôt": "Empty frame saved for my Computer Science degree, coming soon",
   "Vue rapide": "Quick view",
 
   // dossier
@@ -75,6 +77,28 @@ const EN = {
   "Les jeux vidéo": "Video games",
   "Ce qui m'a donné envie de comprendre ce qu'il y a derrière l'écran.": "What made me want to understand what happens behind the screen.",
   "On se parle ?": "Let's talk",
+  "J'apprends en ce moment": "What I'm learning now",
+  "Page 4 · En cours": "Page 4 · In progress",
+  "Une API structurée en modules, avec validation et Swagger": "A modular API with validation and Swagger",
+  "Angular et les signals": "Angular and signals",
+  "Des écrans réactifs avec Angular Material": "Reactive screens with Angular Material",
+  "Keycloak et OpenID Connect": "Keycloak and OpenID Connect",
+  "La connexion sécurisée pilotée par le serveur": "Secure sign-in driven by the server",
+  "Docker et Kubernetes": "Docker and Kubernetes",
+  "Conteneurs, déploiement, kubectl": "Containers, deployment, kubectl",
+  "Les tests": "Testing",
+  "Jest et tests de bout en bout dans la CI GitLab": "Jest and end-to-end tests in GitLab CI",
+  "tout ça grâce au stage !": "all thanks to my internship!",
+  "Prochaines étapes": "Next steps",
+  "Page 5 · Objectifs": "Page 5 · Goals",
+  "Créer mon portfolio": "Build my portfolio",
+  "Finir mon stage chez ISI": "Finish my internship at ISI",
+  "Valider ma licence": "Complete my degree",
+  "Entrer en master": "Start a master's degree",
+  "Mettre Box Box en public et l'améliorer": "Make Box Box public and keep improving it",
+  "Contribuer à un projet open source": "Contribute to an open-source project",
+  "la suite au prochain commit…": "to be continued in the next commit…",
+  "Page 6 · Contact": "Page 6 · Contact",
   "Je termine ma licence et je pense poursuivre en master. En attendant, mon code est sur GitHub : n'hésite pas à y jeter un œil ou à me contacter.":
     "I'm finishing my degree and plan to go on to a master's. In the meantime, my code is on GitHub: feel free to take a look or get in touch.",
   "Copier": "Copy",
@@ -118,6 +142,11 @@ const EN = {
   "Carnet : à propos et compétences": "Notebook: about me and skills",
   "Mon stage chez ISI": "My internship at ISI",
   "Mon CV": "My CV",
+  "Voir le téléphone en grand": "See the phone up close",
+  "Voir mon activité GitHub en grand": "See my GitHub activity up close",
+  "Mon téléphone": "My phone",
+  "Mon activité GitHub": "My GitHub activity",
+  "Mon activité GitHub sur un an (ouvre mon profil GitHub)": "My GitHub activity over a year (opens my GitHub profile)",
   "Numéro de téléphone masqué": "Phone number hidden",
   "Choisir la langue": "Choose the language",
 
@@ -158,7 +187,7 @@ export const tr = (obj, field) => (lang === "en" && obj[field + "_en"] !== undef
 
 // --- traduction des textes fixes de la page ---
 // éléments dont le texte est écrit par le JavaScript (heure, météo, compteurs…) : on n'y touche pas ici
-const SKIP = "script,style,svg,#docs,#badge-panel,#cv-panel,#kb,#clock,#day,#wx,#gh-notif,#count,#nb-pos,#copygh,#toast,[data-count],[data-lang]";
+const SKIP = "script,style,svg,#docs,#badge-panel,#cv-panel,#kb,#clock,#day,#wx,#gh-notif,#count,#nb-pos,#copygh,#toast,#cal-month,#cal-grid,#cal-foot,#season,[data-count],[data-lang]";
 let textNodes = null, attrEls = null;
 
 function collect() {

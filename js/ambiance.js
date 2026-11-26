@@ -10,6 +10,7 @@ const room = document.getElementById("room");
 const lamp = document.getElementById("o-lamp");
 const sun = document.getElementById("sunlight");
 const tint = document.getElementById("tint");
+const glow = document.getElementById("screenglow");
 const wxText = document.getElementById("wx");
 const params = new URLSearchParams(location.search);
 
@@ -43,6 +44,9 @@ function placeLights() {
   room.style.setProperty("--ay", L.lampAim[1] + "px");
   const [x, y, w, h] = L.sun;
   Object.assign(sun.style, {left: x + "px", top: y + "px", width: w + "px", height: h + "px"});
+  // la lueur de l'écran part du bas de la barre de l'écran et s'étale sur le bureau
+  const [mx, my, mw, mh] = L.o.monitor;
+  Object.assign(glow.style, {left: mx - mw * .15 + "px", top: my + mh * .3 + "px", width: mw * 1.3 + "px", height: mh * 3 + "px"});
 }
 
 function render() {

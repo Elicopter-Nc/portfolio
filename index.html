@@ -55,7 +55,7 @@
         </g>
       </svg>
     </button>
-    <div class="obj monitor" data-o="monitor" aria-hidden="true"><div class="foot"></div><div class="bar"></div></div>
+    <div class="obj monitor" data-o="monitor"><div class="foot"></div><div class="bar"></div></div>
     <div class="obj mat" data-o="mat" aria-hidden="true"></div>
     <div class="obj keyboard" data-o="keyboard" aria-hidden="true" id="kb"></div>
     <button class="obj click cv-desk" data-o="cv" id="o-cv" aria-label="Lire mon CV">
@@ -106,10 +106,10 @@
       </svg>
     </div>
 
-    <div class="obj phone-desk" data-o="phone" aria-hidden="true">
+    <button class="obj click phone-desk" data-o="phone" id="o-phone" aria-label="Voir le téléphone en grand">
       <div class="scr"><div class="time" id="clock">9:41</div><div class="day" id="day">Nouméa</div><div class="wx" id="wx"></div>
         <div class="notif" id="gh-notif"><b id="gh-app">Kairos</b><span id="gh-text">Stage chez ISI · 8 h 00</span><small id="gh-time"></small></div></div>
-    </div>
+    </button>
 
     <div class="obj card shadow" data-o="card">
       <div><h1>Eli</h1><p>Développeur fullstack en devenir</p></div>
@@ -146,6 +146,7 @@
         <text x="85" y="152" text-anchor="middle" font-family="Unbounded, sans-serif" font-weight="700" font-size="14" fill="#1b1d20">Eli</text>
         <text x="85" y="167" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8.5" fill="#55595f" id="badge-role">STAGIAIRE DEV</text>
         <g fill="#1b1d20"><rect x="48" y="178" width="2" height="12"/><rect x="52" y="178" width="1" height="12"/><rect x="55" y="178" width="3" height="12"/><rect x="60" y="178" width="1" height="12"/><rect x="63" y="178" width="2" height="12"/><rect x="67" y="178" width="1" height="12"/><rect x="70" y="178" width="3" height="12"/><rect x="75" y="178" width="1" height="12"/><rect x="78" y="178" width="2" height="12"/><rect x="82" y="178" width="1" height="12"/><rect x="85" y="178" width="3" height="12"/><rect x="90" y="178" width="2" height="12"/><rect x="94" y="178" width="1" height="12"/><rect x="97" y="178" width="3" height="12"/><rect x="102" y="178" width="1" height="12"/><rect x="105" y="178" width="2" height="12"/><rect x="109" y="178" width="1" height="12"/><rect x="112" y="178" width="3" height="12"/><rect x="117" y="178" width="2" height="12"/></g>
+        <text id="badge-num" x="85" y="198" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="6.5" fill="#55595f" letter-spacing="1"></text>
       </svg>
     </button>
 
@@ -177,6 +178,18 @@
       <h2 style="font-size:28px">TODO</h2>
       <ul style="font-size:20px"><li>finir la L3</li><li>trouver un stage</li><li class="no" id="todo-last"><span>finir le portfolio</span></li></ul>
     </button>
+    <button class="obj click calendar" data-o="calendar" id="o-calendar" aria-label="Voir mon activité GitHub en grand">
+      <span class="cal-rings" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+      <span class="cal-head"><b id="cal-month"></b><span id="cal-year"></span></span>
+      <span class="cal-grid" id="cal-grid" aria-hidden="true"></span>
+      <span class="cal-foot" id="cal-foot"></span>
+    </button>
+
+    <!-- décorations selon la date (remplies par js/seasons.js) -->
+    <div class="season" id="season" aria-hidden="true"></div>
+    <!-- lueur bleutée de l'écran, visible en mode nuit -->
+    <div class="screenglow" id="screenglow" aria-hidden="true"></div>
+
     <!-- lumière : fenêtre (jour, météo), teinte de l'heure, nuit avec la lampe -->
     <div class="sunlight" id="sunlight" aria-hidden="true"><i></i><i></i><i></i><i></i><div class="drops"></div></div>
     <div class="tint" id="tint" aria-hidden="true"></div>
@@ -196,6 +209,21 @@
   <div class="front" id="front-scene">
     <div class="wall"></div>
     <div class="floor"></div>
+    <!-- diplômes accrochés au mur du couloir -->
+    <figure class="diploma bac" role="img" aria-label="Diplôme du baccalauréat général, spécialités Mathématiques et NSI, 2023">
+      <div class="dp-paper">
+        <small>Diplôme national</small>
+        <b>Baccalauréat général</b>
+        <span class="dp-to">décerné à</span>
+        <span class="dp-name">Eli Grosseau</span>
+        <span class="dp-spec">Mathématiques · NSI</span>
+        <span class="dp-foot">Lycée Dick Ukeiwë · 2023</span>
+        <i class="dp-seal" aria-hidden="true"></i>
+      </div>
+    </figure>
+    <figure class="diploma next" role="img" aria-label="Cadre vide réservé à la licence informatique, bientôt">
+      <div class="dp-paper empty"><span class="dp-note">Licence Info<br>bientôt ici !</span></div>
+    </figure>
     <div class="door-wrap" id="door-wrap">
       <div class="doorway" aria-hidden="true"></div>
       <button type="button" class="door" id="intro-go" aria-label="Ouvrir la porte et entrer dans le bureau d'Eli">
@@ -260,14 +288,37 @@
       </ul>
     </article>
     <article class="page" data-p="3">
-      <h2>On se parle ?<small>Page 4 · Contact</small></h2>
+      <h2>J'apprends en ce moment<small>Page 4 · En cours</small></h2>
+      <ul class="learning">
+        <li><b>NestJS</b><span>Une API structurée en modules, avec validation et Swagger</span><i class="bar" style="--v:.7"></i></li>
+        <li><b>Angular et les signals</b><span>Des écrans réactifs avec Angular Material</span><i class="bar" style="--v:.65"></i></li>
+        <li><b>Keycloak et OpenID Connect</b><span>La connexion sécurisée pilotée par le serveur</span><i class="bar" style="--v:.55"></i></li>
+        <li><b>Docker et Kubernetes</b><span>Conteneurs, déploiement, kubectl</span><i class="bar" style="--v:.4"></i></li>
+        <li><b>Les tests</b><span>Jest et tests de bout en bout dans la CI GitLab</span><i class="bar" style="--v:.6"></i></li>
+      </ul>
+      <span class="note">tout ça grâce au stage !</span>
+    </article>
+    <article class="page" data-p="4">
+      <h2>Prochaines étapes<small>Page 5 · Objectifs</small></h2>
+      <ul class="goals">
+        <li class="done">Créer mon portfolio</li>
+        <li>Finir mon stage chez ISI</li>
+        <li>Valider ma licence</li>
+        <li>Entrer en master</li>
+        <li>Mettre Box Box en public et l'améliorer</li>
+        <li>Contribuer à un projet open source</li>
+      </ul>
+      <span class="note">la suite au prochain commit…</span>
+    </article>
+    <article class="page" data-p="5">
+      <h2>On se parle ?<small>Page 6 · Contact</small></h2>
       <p>Je termine ma licence et je pense poursuivre en master. En attendant, mon code est sur GitHub : n'hésite pas à y jeter un œil ou à me contacter.</p>
       <p class="mail"><a href="mailto:eli.grosseau21@gmail.com">eli.grosseau21@gmail.com</a></p>
       <p class="copy">github.com/Elicopter-Nc <button type="button" id="copygh" style="cursor:pointer;border:0;background:#1d1f22;color:#fff;border-radius:4px;padding:3px 10px;font:600 12px var(--font-body)">Copier</button></p>
       <p style="margin-top:18px"><a href="https://github.com/Elicopter-Nc" target="_blank" rel="noopener">Ouvrir mon GitHub ↗</a></p>
       <span class="note">basé à Nouméa (UTC+11)</span>
     </article>
-    <nav class="nb-nav"><button type="button" id="nb-prev">← Page précédente</button><span id="nb-pos">1-2 / 4</span><button type="button" id="nb-next">Page suivante →</button></nav>
+    <nav class="nb-nav"><button type="button" id="nb-prev">← Page précédente</button><span id="nb-pos">1-2 / 6</span><button type="button" id="nb-next">Page suivante →</button></nav>
   </div>
 </div>
 
@@ -281,6 +332,18 @@
 <div class="overlay center" id="ov-cv" hidden role="dialog" aria-modal="true" aria-label="Mon CV">
   <button class="close" data-close>← Retour au bureau</button>
   <article class="cv-page" id="cv-panel"></article>
+</div>
+
+<!-- ====================== TÉLÉPHONE ====================== -->
+<div class="overlay center" id="ov-phone" hidden role="dialog" aria-modal="true" aria-label="Mon téléphone">
+  <button class="close" data-close>← Retour au bureau</button>
+  <div class="phone-big" id="phone-panel"></div>
+</div>
+
+<!-- ====================== CALENDRIER ====================== -->
+<div class="overlay center" id="ov-cal" hidden role="dialog" aria-modal="true" aria-label="Mon activité GitHub">
+  <button class="close" data-close>← Retour au bureau</button>
+  <div class="cal-big" id="cal-panel"></div>
 </div>
 
 <!-- ====================== POST-IT ====================== -->

@@ -2,6 +2,7 @@
 import {STAGE, CV, PROJECTS, GITHUB_URL, EMAIL} from "./data.js";
 import {esc} from "./utils.js";
 import {openOverlay} from "./overlay.js";
+import {badgeNumber} from "./visits.js";
 import {t, tr, isEn} from "./i18n.js";
 
 // Une ligne qui commence par « À compléter » est mise en évidence pour ne pas l'oublier
@@ -18,7 +19,8 @@ function renderBadge() {
       <div><h3>${t("Missions")}</h3><ul>${tr(STAGE, "missions").map(m => `<li>${line(m)}</li>`).join("")}</ul></div>
       <div><h3>${t("Technos")}</h3><div class="tags">${STAGE.stack.map(t => `<span>${line(t)}</span>`).join("")}</div></div>
     </div>
-    <div class="bb-code" aria-hidden="true">${bars}</div>`;
+    <div class="bb-code" aria-hidden="true">${bars}</div>
+    <span class="bb-num" id="badge-num-big" aria-hidden="true">${badgeNumber()}</span>`;
 }
 
 function renderCV() {

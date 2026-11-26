@@ -10,6 +10,10 @@ import {initExtras} from "./extras.js";
 import {initAmbiance} from "./ambiance.js";
 import {initDrag} from "./drag.js";
 import {initGithub} from "./github.js";
+import {initCalendar} from "./calendar.js";
+import {initVisits} from "./visits.js";
+import {initSeasons} from "./seasons.js";
+import {initCloseups} from "./closeups.js";
 
 // nombre de fiches affiché sur le dossier, calculé depuis data.js
 document.querySelectorAll("[data-count]").forEach(el => { el.textContent = PROJECTS.length; });
@@ -24,6 +28,10 @@ initExtras();
 initAmbiance();
 initDrag();
 initGithub();
+initCalendar();
+initVisits();
+initSeasons();
+initCloseups();
 
 // écran d'accueil (première visite seulement), puis le clavier tape « ELI »
 runIntro().then(shown => typeName(shown ? 250 : 900));
