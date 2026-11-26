@@ -33,7 +33,7 @@ export const PROJECTS = [
    learned_en: ["Packaging a web app with Electron (Linux and Windows)", "Persisting data client-side with localStorage", "Rendering Markdown in notes"]},
   {id: "bureau", name: "Le bureau d'Eli", name_en: "Eli's desk", type: "Web", yr: "2026", url: "https://github.com/Elicopter-Nc/portfolio", stack: "HTML · CSS · JavaScript",
    bg: "#8a6a3f", fg: "#fbf3e4", a: "#dcb676", b: "#2f3b38",
-   // photo: {src: "assets/projets/bureau.jpg", w: 1200, h: 630, alt: "…"},   ← à ajouter quand tu auras l'image
+   photo: {src: "assets/projets/bureau.jpg", w: 960, h: 530, alt: "Le bureau vu de dessus : clavier, dossier Projets, carnet, post-its et calendrier"},
    desc: "Ce portfolio : un bureau vu de dessus où chaque objet s'ouvre. Dossier de projets au défilement, carnet, CV, météo et heure réelles de Nouméa, mode nuit et objets déplaçables.",
    challenge: "Tout faire tenir dans une seule scène animée, fluide et lisible, sans framework ni étape de build, en restant accessible au clavier et sur mobile.",
    learned: ["Animer au scroll et en FLIP avec l'API Web Animations", "Consommer des API publiques côté client (GitHub, Open-Meteo)", "Rendre une page bilingue sans bibliothèque"],

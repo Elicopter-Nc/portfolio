@@ -505,7 +505,7 @@ button{font:inherit;color:inherit}
 .photo{position:relative;margin:14px 6px 0 0;align-self:start;justify-self:end;background:#fff;padding:8px 8px 22px;
   box-shadow:0 1px 2px rgba(0,0,0,.18),0 14px 26px -8px rgba(0,0,0,.35);transform:rotate(2.5deg)}
 .photo.portrait{width:190px}
-.photo.landscape{width:min(440px,42vw);transform:rotate(-2deg)}
+.photo.landscape{width:min(360px,34vw);transform:rotate(-2deg)}
 .photo img{display:block;width:100%;height:auto;aspect-ratio:var(--ratio)}
 .photo::after{content:"";position:absolute;inset:8px 8px 22px;pointer-events:none;
   background:linear-gradient(125deg,rgba(255,255,255,.18) 0%,transparent 38%,transparent 70%,rgba(255,255,255,.08) 100%)}
