@@ -477,6 +477,7 @@ button{font:inherit;color:inherit}
 .label p{margin:0;font-size:15px;color:var(--paper-muted)}
 .f-hint{font:500 12.5px var(--font-mono);color:var(--kraft-ink)}
 .doc{position:absolute;top:0;will-change:transform}
+.f-back,.f-front{will-change:transform}
 .d-tab{all:unset;box-sizing:border-box;cursor:pointer;position:absolute;top:-30px;height:31px;padding:0 12px;border-radius:9px 9px 0 0;
   background:var(--c-bg);color:var(--c-fg);font-size:12.5px;font-weight:600;display:flex;align-items:center;gap:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 -2px 6px rgba(0,0,0,.12)}
 .d-tab span{font:400 11px var(--font-mono);opacity:.7}
@@ -532,7 +533,8 @@ button{font:inherit;color:inherit}
   background-image:radial-gradient(#d6d3c9 1.1px,transparent 1.2px);background-size:22px 22px;background-position:11px 11px}
 .page:nth-child(odd){border-radius:6px 2px 2px 6px}
 .page:nth-child(even){border-radius:2px 6px 6px 2px}
-.spiral{position:absolute;left:50%;top:26px;bottom:26px;width:28px;margin-left:-14px;z-index:2;background:repeating-linear-gradient(transparent 0 10px,#c4c8ce 10px 16px,transparent 16px 30px);border-radius:4px}
+/* spirale du carnet : elle s'arrête au bas des pages, au-dessus des boutons Page précédente / suivante */
+.spiral{position:absolute;left:50%;top:26px;bottom:86px;width:28px;margin-left:-14px;z-index:2;background:repeating-linear-gradient(transparent 0 10px,#c4c8ce 10px 16px,transparent 16px 30px) 0 0/100% 30px round;border-radius:4px}
 .page h2{font:700 44px/1 var(--font-hand);margin:0 0 16px;color:#1c2638}
 .page h2 small{font:500 12px var(--font-mono);color:#6b6e72;display:block;letter-spacing:.06em;margin-top:6px;text-transform:uppercase}
 .page p{margin:0 0 14px;font-size:16.5px;max-width:48ch;background:rgba(251,250,245,.85)}
@@ -565,6 +567,7 @@ button{font:inherit;color:inherit}
 .copy{display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;font:500 14px var(--font-mono);background:#fff;border:1.5px dashed #1d1f22;padding:8px 12px;border-radius:6px;user-select:all}
 @media (max-width:760px){
   .nb{grid-template-columns:1fr}
+  .nb-nav{gap:8px}.nb-nav span{white-space:nowrap}.nb-nav button{white-space:nowrap;padding:8px 12px;font-size:13px}
   .spiral{left:14px;right:14px;top:6px;bottom:auto;width:auto;height:16px;margin:0;background:repeating-linear-gradient(90deg,transparent 0 10px,#c4c8ce 10px 16px,transparent 16px 30px)}
   .page{min-height:0;padding:30px 22px 24px;border-radius:6px!important}
   .page h2{font-size:38px}

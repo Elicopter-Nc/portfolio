@@ -1,11 +1,11 @@
-// Le dossier des projets : le scroll ouvre la chemise puis sort les fiches une à une.
+// Le dossier des projets : le scroll ouvre la chemise puis sort les fiches une à une, qui s'empilent.
 import {PROJECTS} from "./data.js";
 import {esc, pad, clamp, ease, reduceMotion} from "./utils.js";
 import {openOverlay} from "./overlay.js";
 import {t, tr} from "./i18n.js";
 
 const N = PROJECTS.length;
-const PHASES = N + 1.6;          // 1 phase d'ouverture + 1 par fiche + un peu de marge à la fin
+const PHASES = N + 1.3;          // 1 phase d'ouverture + 1 par fiche + un peu de marge pour lire la dernière
 
 const ov = document.getElementById("ov-folder");
 const sec = document.getElementById("dossier");
@@ -17,7 +17,7 @@ const count = document.getElementById("count");
 const barfill = document.getElementById("barfill");
 const fhint = document.getElementById("fhint");
 let docs = [];
-let S = 0, docH = 0, readTop = 0, frontH = 0, rest = [];
+let S = 0, docH = 0, frontH = 0, rest = [];
 
 // Photo « papier » tenue par un trombone ; orientation déduite de ses dimensions
 function photoTemplate(p) {
@@ -60,21 +60,27 @@ function docTemplate(p, i) {
 }
 
 // Calcule les tailles et positions en fonction de l'écran
+let dy = 0, readTop = 0, backTop = 0;
 export function layoutFolder() {
   if (reduceMotion || ov.hidden) return;
   S = ov.clientHeight;
   stage.style.height = S + "px";
   const W = fdesk.clientWidth, narrow = W < 640;
-  const folderH = Math.min(S * .56, 420), backTop = S - folderH;
+  const folderH = Math.min(S * .56, 420);
+  backTop = S - folderH;
   frontH = folderH * .72;
   back.style.top = backTop + "px";
   back.style.height = folderH + "px";
   front.style.height = frontH + "px";
-  docH = Math.min(S - 90, narrow ? 680 : 640);
-  readTop = Math.max(70, (S - docH + 40) / 2);
+  // la fiche lue se pose en haut ; le dossier descend pour que son rabat avant arrive juste sous elle
+  readTop = (narrow ? 100 : 64) + 30;
+  docH = Math.min(S - readTop - 64, narrow ? 680 : 640);
+  const frontTop = Math.min(readTop + docH + 14, S - 50);
+  dy = frontTop - (S - frontH);
   const inner = W - (narrow ? 20 : 48);
-  const tabW = narrow ? Math.max(64, inner / N + 26) : Math.min(170, inner / N + 44);
-  const step = (inner - tabW) / (N - 1);
+  const tabsW = inner - (narrow ? 6 : 24);          // les onglets s'arrêtent avant le bord du dossier
+  const tabW = narrow ? Math.max(64, tabsW / N + 26) : Math.min(170, tabsW / N + 44);
+  const step = (tabsW - tabW) / (N - 1);
   docs.forEach((d, i) => {
     d.style.left = (narrow ? 10 : 24) + "px";
     d.style.width = inner + "px";
@@ -85,41 +91,58 @@ export function layoutFolder() {
     rest[i] = backTop + 46 + i * 4;
   });
   sec.style.height = (S + PHASES * S * .85) + "px";
-  update();
+  shown = target();
+  draw();
 }
 
-// Lift d'une fiche selon sa progression locale t (0 → 1) : monte, reste, redescend
-function liftAt(t) {
-  if (t > 0 && t < .3) return ease(t / .3);
-  if (t >= .3 && t < .85) return 1;
-  if (t >= .85 && t < 1) return 1 - ease((t - .85) / .15);
-  return 0;
-}
+// Progression lue dans le scroll (0 → 1)
+const target = () => clamp(ov.scrollTop / Math.max(1, sec.offsetHeight - S), 0, 1);
 
-function update() {
-  if (reduceMotion || ov.hidden) return;
-  const len = sec.offsetHeight - S;
-  const prog = clamp(ov.scrollTop / len, 0, 1);
+// Dessine le dossier pour une progression donnée :
+// phase 0 = le dossier s'ouvre et descend ; phase 1 + i = la fiche i sort de la poche et se pose par-dessus les précédentes
+function draw() {
+  const prog = shown;
   const u = prog * PHASES;
   const opening = ease(clamp(u, 0, 1));
-  front.style.transform = `translateY(${(opening * frontH * .32).toFixed(1)}px)`;
+  const shift = dy * opening;
+  back.style.transform = `translate3d(0,${shift.toFixed(1)}px,0)`;
+  front.style.transform = `translate3d(0,${(shift + opening * 10).toFixed(1)}px,0)`;
+  const lifts = docs.map((_, i) => ease(clamp((u - 1 - i) / .8, 0, 1)));
   let cur = -1;
   docs.forEach((d, i) => {
-    const l = liftAt(u - (1 + i));
-    const r = rest[i] + 22 * (1 - opening);
-    const y = r + (readTop - r) * l;
-    d.style.transform = `translate3d(0,${y.toFixed(1)}px,0) rotate(${((1 - l) * (i % 2 ? .5 : -.5)).toFixed(2)}deg)`;
-    d.style.zIndex = l > .01 ? 50 : i + 1;
-    d.dataset.up = l > .01 ? 1 : 0;
+    const l = lifts[i];
+    // fiches posées par-dessus celle-ci : elle recule un peu, comme les cartes de la vue rapide
+    const above = Math.min(lifts.slice(i + 1).reduce((a, b) => a + b, 0), 3);
+    const r = rest[i] + shift;
+    const y = r + (readTop - r) * l - above * 14 * l;
+    const sc = 1 - above * .035 * l;
+    // droite dans le dossier et une fois posée ; elle penche juste un peu pendant qu'on la sort
+    d.style.transform = `translate3d(0,${y.toFixed(1)}px,0) rotate(${(Math.sin(l * Math.PI) * (i % 2 ? .8 : -.8)).toFixed(2)}deg) scale(${sc.toFixed(4)})`;
+    // toujours derrière le rabat avant (z 20) : on voit la fiche sortir de la poche
+    d.style.zIndex = l > .001 ? 10 + i : i + 1;
+    d.dataset.up = l > .001 ? 1 : 0;
     d.style.setProperty("--lift", l.toFixed(3));
     if (l > .5) cur = i;
   });
   count.innerHTML = cur >= 0 ? `${t("Fiche")} <b>${pad(cur + 1)}</b> / ${pad(N)} · ${esc(tr(PROJECTS[cur], "name"))}`
     : u < .5 ? `<b>${t("Dossier fermé")}</b>`
-    : u > N + 1 ? `<b>${t("Toutes les fiches lues")}</b>`
     : `<b>${t("Dossier ouvert")}</b>`;
   barfill.style.width = (prog * 100) + "%";
   fhint.style.opacity = 1 - opening;
+}
+
+// Lissage : l'affichage rattrape le scroll en douceur (la molette avance par crans, l'animation non)
+let shown = 0, raf = 0;
+function update() {
+  if (reduceMotion || ov.hidden || raf) return;
+  const step = () => {
+    const goal = target();
+    shown += (goal - shown) * .16;
+    if (Math.abs(goal - shown) < .0003) shown = goal;
+    draw();
+    raf = shown === goal ? 0 : requestAnimationFrame(step);
+  };
+  raf = requestAnimationFrame(step);
 }
 
 export function initFolder() {
@@ -129,10 +152,10 @@ export function initFolder() {
     docs = [...holder.querySelectorAll(".doc")];
   };
   render();
-  addEventListener("lang:change", () => { render(); layoutFolder(); update(); });
+  addEventListener("lang:change", () => { render(); layoutFolder(); });
   if (reduceMotion) document.documentElement.classList.add("static");
 
-  ov.addEventListener("scroll", () => requestAnimationFrame(update), {passive: true});
+  ov.addEventListener("scroll", update, {passive: true});
 
   // clic sur un onglet : on fait défiler jusqu'à cette fiche
   holder.addEventListener("click", e => {
@@ -140,12 +163,12 @@ export function initFolder() {
     if (!tab) return;
     if (reduceMotion) { tab.parentElement.scrollIntoView(); return; }
     const len = sec.offsetHeight - S;
-    ov.scrollTo({top: ((1 + Number(tab.dataset.i) + .55) / PHASES) * len, behavior: "smooth"});
+    ov.scrollTo({top: ((1 + Number(tab.dataset.i) + .85) / PHASES) * len, behavior: "smooth"});
   });
 
   document.getElementById("o-folder").addEventListener("click", e => openOverlay({
     ov, panel: fdesk, src: e.currentTarget, target: () => back,
     onOpen: () => { ov.scrollTop = 0; layoutFolder(); },
-    onClose: () => { ov.scrollTop = 0; update(); },
+    onClose: () => { ov.scrollTop = 0; shown = 0; draw(); },
   }));
 }
